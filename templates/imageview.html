@@ -16,6 +16,12 @@
       </div>
       <button type="Go" class="btn btn-default">Go</button>
     </form>
+    <form class="navbar-form navbar-left" role="search" name="goto" action="/molweight" method="POST">
+      <div class="form-group">
+        <input type="text" name="smiles" class="form-control" placeholder="Go to index">
+      </div>
+      <button type="Go" class="btn btn-default">Go</button>
+    </form>
     <ul class="nav navbar-nav">
       <li><a href="/">home</a></li>
       <li><a href="/{{pager.prev}}">&larr;</a> </li>
