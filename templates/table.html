@@ -1,9 +1,13 @@
-<table class="table table-striped">
+<table class="table">
   <tbody>
-    {% for key in ["name", "ra", "dec", "notes"] %}
+    {% for key in column %}
     <tr>
       <td><b>{{ key|e|capitalize }}</b></td>
+      {% if data[key]|int > 100 %}
+      <td bgcolor="#00ff00">{{ data[key]|e }}</td>
+      {% else %}
       <td>{{ data[key]|e }}</td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000pt" height="1000pt" viewBox="0 0 1000 1000" version="1.1">
+<defs>
+<g>
+<symbol overflow="visible" id="glyph0-0">
+<path style="stroke:none;" d="M 0.640625 2.265625 L 0.640625 -9.015625 L 7.03125 -9.015625 L 7.03125 2.265625 Z M 1.359375 1.546875 L 6.328125 1.546875 L 6.328125 -8.296875 L 1.359375 -8.296875 Z M 1.359375 1.546875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph0-1">
+<path style="stroke:none;" d="M 1.25 -9.328125 L 2.515625 -9.328125 L 2.515625 0 L 1.25 0 Z M 1.25 -9.328125 "/>
+</symbol>
+</g>
+</defs>
+<g id="surface1">
+<rect x="0" y="0" width="1000" height="1000" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
+<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
+  <use xlink:href="#glyph0-1" x="498" y="536.255859"/>
+</g>
+<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
+  <use xlink:href="#glyph0-1" x="608.417969" y="472.505859"/>
+</g>
+<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
+  <use xlink:href="#glyph0-1" x="718.835938" y="536.255859"/>
+</g>
+<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 279.164062 531.875 L 389.582031 468.125 "/>
+<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 389.582031 468.125 L 443.039062 498.988281 "/>
+<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 443.039062 498.988281 L 496.5 529.855469 "/>
+<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 503.5 529.855469 L 606.917969 470.144531 "/>
+<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 613.917969 470.144531 L 717.335938 529.855469 "/>
+</g>
+</svg>

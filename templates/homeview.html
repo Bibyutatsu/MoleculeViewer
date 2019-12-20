@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-header">
+      
+    <span class="navbar-brand">{{ config.APPNAME }}</span>
+    </div>
+    <form class="navbar-form navbar-left" role="Input" name="InputMolecule" action="/molIn" method="POST">
+      <div class="form-group">
+        <input type="text" name="smiles" class="form-control" placeholder="Input SMILES">
+      </div>
+      <button type="Enter" class="btn btn-default">Enter</button>
+    </form>
+    <form class="navbar-form navbar-left" role="InputCSV" name="InputCSV" action="/molCsvIn" method="POST">
+      <div class="form-group">
+        <input type="text" name="path" class="form-control" placeholder="Input SMILES CSV">
+      </div>
+      <button type="Enter" class="btn btn-default">Enter</button>
+    </form>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+        <li><a href="/0">Molecules</a></li>
+        <li><a href="/clear">Clear Database</a></li>
+      {% include 'links.html' %}
+    </ul>
+  </nav>
+<div class="col-md-6">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=alert>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<table class="table">
+    <thead>
+        <tr>
+        <th>Molecules in Database</th>
+        </tr>
+    </thead>
+  <tbody>
+    {% for rows in data %}
+    <tr>
+        <td>
+            <a href='/{{ loop.index - 1}}'>{{ rows["name"]|e }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

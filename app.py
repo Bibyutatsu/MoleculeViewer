@@ -1,18 +1,49 @@
 import csv
-from flask import Flask, render_template, request, redirect, url_for
-import requests
+from flask import Flask, render_template, request, redirect, url_for, flash
 from pager import Pager
 from rdkit import Chem
 from rdkit.Chem import Draw, Descriptors
 import pandas as pd
 import os
+from moses.utils import get_mol
+from pychem2 import constitution
 
 APPNAME = "Molecule Viewer"
 STATIC_FOLDER = 'example'
 IMAGE_FOLDER = 'example/images'
 TABLE_FILE = "example/fakecatalog.csv"
-
-pd.DataFrame([], columns=['name', 'ra', 'dec', 'notes']).to_csv(TABLE_FILE, index=False)
+columns = ['name',
+           'Weight',
+           'AWeight',
+           'nhyd',
+           'nhal',
+           'nhet',
+           'nhev',
+           'ncof',
+           'ncocl',
+           'ncobr',
+           'ncoi',
+           'ncarb',
+           'nphos',
+           'nsulph',
+           'noxy',
+           'nnitro',
+           'nring',
+           'nrot',
+           'ndonr',
+           'naccr',
+           'nsb',
+           'ndb',
+           'naro',
+           'ntb',
+           'nta',
+           'PC1',
+           'PC2',
+           'PC3',
+           'PC4',
+           'PC5',
+           'PC6',
+           'notes']
 
 
 def read_table(url):
@@ -21,22 +52,33 @@ def read_table(url):
     with open(url) as f:
         return [row for row in csv.DictReader(f.readlines())]
 
+
 def add_table(url, smiles):
     df = pd.read_csv(url)
     num_of_mols = len(df)
-    
     mol = Chem.MolFromSmiles(smiles)
-    ra = Descriptors.ExactMolWt(mol)
-    dec = Descriptors.ExactMolWt(mol)
-    notes = 'Mol' + str(num_of_mols + 1)
-    name = 'Mol' + str(num_of_mols + 1) + '.jpg'
-    Draw.MolToImageFile(mol, os.path.join(IMAGE_FOLDER, name))
-    row_to_add = pd.DataFrame([[notes, ra, dec, notes]], columns=['name', 'ra', 'dec', 'notes'])
+    notes = 'Molecule' + str(num_of_mols) + '.svg'
+    out = constitution.GetConstitutional(mol)
+    out['name'] = smiles
+    out['notes'] = notes
+    Draw.MolToFile(mol,
+                   os.path.join(IMAGE_FOLDER, notes),
+                   size=(1000, 1000), fitImage=True)
+    row_to_add = pd.DataFrame([out])
     df = df.append(row_to_add)
     df.to_csv(url, index=False)
 
 
-table = read_table(TABLE_FILE)
+def delete_table():
+    os.system('rm -r ./{0}/*.jpg'.format(IMAGE_FOLDER))
+    pd.DataFrame([], columns=columns).to_csv(TABLE_FILE, index=False)
+
+
+if os.path.isfile(TABLE_FILE):
+    table = read_table(TABLE_FILE)
+else:
+    delete_table()
+    table = read_table(TABLE_FILE)
 pager = Pager(len(table))
 
 
@@ -44,16 +86,26 @@ app = Flask(__name__, static_folder=STATIC_FOLDER)
 app.config.update(
     APPNAME=APPNAME,
 )
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 @app.route('/')
 def index():
     global pager, table
-    if pager.count == 0:
-        add_table(TABLE_FILE, 'CC')
-        table = read_table(TABLE_FILE)
-        pager = Pager(len(table))
-    return redirect('/0')
+    return render_template('homeview.html', data=table)
 
 
 @app.route('/<int:ind>/')
@@ -67,7 +119,8 @@ def image_view(ind=None):
             'imageview.html',
             index=ind,
             pager=pager,
-            data=table[ind])
+            data=table[ind],
+            column=columns)
 
 
 @app.route('/goto', methods=['POST', 'GET'])
@@ -75,13 +128,48 @@ def goto():
     return redirect('/' + request.form['index'])
 
 
-@app.route('/molweight', methods=['POST', 'GET'])
-def molweight():
+@app.route('/molIn', methods=['POST', 'GET'])
+def molIn():
     global table, pager
-    add_table(TABLE_FILE, request.form['smiles'])
+    if (
+        (request.form['smiles'] != '') and
+        (get_mol(request.form['smiles']) is not None)
+    ):
+        add_table(TABLE_FILE, request.form['smiles'])
+        table = read_table(TABLE_FILE)
+        pager = Pager(len(table))
+    else:
+        flash("Not a valid SMILE")
+    return redirect('/')
+
+
+@app.route('/molCsvIn', methods=['POST', 'GET'])
+def molCsvIn():
+    global table, pager
+    if (
+        (request.form['path'] != '') and
+        (os.path.isfile(request.form['path']) is not False)
+    ):
+        df_inp = pd.read_csv(request.form['path'])
+        for i, smile in enumerate(df_inp['SMILES']):
+            if get_mol(smile) is not None:
+                add_table(TABLE_FILE, smile)
+            else:
+                flash(str(i) + ' ' + smile + " is Not a valid SMILE")
+        table = read_table(TABLE_FILE)
+        pager = Pager(len(table))
+    else:
+        flash("Not a valid CSV path")
+    return redirect('/')
+
+
+@app.route('/clear')
+def cleardb():
+    global table, pager
+    delete_table()
     table = read_table(TABLE_FILE)
     pager = Pager(len(table))
-    return redirect('/0')
+    return redirect('/')
 
 
 if __name__ == '__main__':
