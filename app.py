@@ -1,8 +1,8 @@
 import csv
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, flash
 from pager import Pager
 from rdkit import Chem
-from rdkit.Chem import Draw, Descriptors
+from rdkit.Chem import Draw
 import pandas as pd
 import os
 from moses.utils import get_mol
@@ -12,6 +12,14 @@ APPNAME = "Molecule Viewer"
 STATIC_FOLDER = 'example'
 IMAGE_FOLDER = 'example/images'
 TABLE_FILE = "example/fakecatalog.csv"
+
+palette = ['#3fc5f0',
+           '#42dee1',
+           '#6decb9',
+           '#eef5b2'
+           ]
+
+
 columns = ['name',
            'Weight',
            'AWeight',
@@ -70,7 +78,7 @@ def add_table(url, smiles):
 
 
 def delete_table():
-    os.system('rm -r ./{0}/*.jpg'.format(IMAGE_FOLDER))
+    os.system('rm -r ./{0}/*'.format(IMAGE_FOLDER))
     pd.DataFrame([], columns=columns).to_csv(TABLE_FILE, index=False)
 
 
@@ -120,12 +128,19 @@ def image_view(ind=None):
             index=ind,
             pager=pager,
             data=table[ind],
-            column=columns)
+            column=columns,
+            palette=palette)
 
 
 @app.route('/goto', methods=['POST', 'GET'])
 def goto():
     return redirect('/' + request.form['index'])
+
+
+@app.route('/compareto', methods=['POST', 'GET'])
+def compareto():
+    return redirect(
+        '/compare/' + request.form['index1'] + '&' + request.form['index2'])
 
 
 @app.route('/molIn', methods=['POST', 'GET'])
@@ -156,6 +171,8 @@ def molCsvIn():
                 add_table(TABLE_FILE, smile)
             else:
                 flash(str(i) + ' ' + smile + " is Not a valid SMILE")
+            # percent = (i + 1) * 100 // len(df_inp)
+            # render_template('progress.html', percent=percent)
         table = read_table(TABLE_FILE)
         pager = Pager(len(table))
     else:
@@ -170,6 +187,19 @@ def cleardb():
     table = read_table(TABLE_FILE)
     pager = Pager(len(table))
     return redirect('/')
+
+
+@app.route('/compare/<int:ind1>&<int:ind2>/')
+def compare(ind1, ind2):
+    global table, pager
+    if ind1 >= pager.count or ind2 >= pager.count:
+        return render_template("404.html"), 404
+    return render_template('compare.html',
+                           pager=pager,
+                           data1=table[ind1],
+                           data2=table[ind2],
+                           column=columns,
+                           palette=palette)
 
 
 if __name__ == '__main__':

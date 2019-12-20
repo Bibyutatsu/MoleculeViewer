@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Comparison{% endblock %}
+
+{% block content %}
+  <nav class="navbar navbar-default">
+    <div class="container" style="width:100%;">
+    <div class="navbar-header">
+    <span class="navbar-brand">{{ config.APPNAME }}</span>
+    </div>
+    <form class="navbar-form navbar-left" role="search" name="goto" action="/compareto" method="POST">
+      <div class="form-group">
+        <input type="text" name="index1" class="form-control" placeholder="First Molecule">
+        <input type="text" name="index2" class="form-control" placeholder="Second Molecule">
+      </div>
+      <button type="Go" class="btn btn-default">Go</button>
+    </form>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/0">Molecules</a></li>
+      <li class="active"><a href="/compare/0&1/">Compare</a></li>
+      <!-- <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+      </li> -->
+      {% include 'links.html' %}
+    </ul>
+  </div>
+  </nav>
+
+<div class="row">
+  <div class="col-md-2 text-center" style="margin-top: 9px">
+    {% for i in range(47) %}
+    <br/>
+    {%endfor%}
+  <table class="table">
+    <tbody>
+      {% for key in column %}
+      <tr>
+        <td><b>{{ key|e|capitalize }}</b></td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+</div>
+  <div class="col-md-5 text-center">
+    <h2>{{data1.name}}</h2>
+    <img src="{{ '/example/images/'+data1.notes }}" class="img-thumbnail" alt="200x200">
+    <table class="table">
+    <tbody>
+      {% for key in column %}
+      <tr>
+        {% if data1[key]|int(-1) != -1 %}
+          {% if data1[key]|int > data2[key]|int %}
+          <td bgcolor={{palette[2]}}>{{ data1[key]|e }}</td>
+          {% elif data1[key]|int == data2[key]|int%}
+          <td bgcolor={{palette[1]}}>{{ data1[key]|e }}</td>
+          {% else %}
+          <td bgcolor={{palette[3]}}>{{ data1[key]|e }}</td>
+          {% endif %}
+        {% else %}
+          <td bgcolor={{palette[0]}}>{{ data1[key]|e }}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+  <div class="col-md-5 text-center">
+    <h2>{{data2.name}}</h2>
+    <img src="{{ '/example/images/'+data2.notes }}" class="img-thumbnail" alt="200x200">
+    <table class="table">
+    <tbody>
+      {% for key in column %}
+      <tr>
+        {% if data1[key]|int(-1) != -1 %}
+          {% if data2[key]|int > data1[key]|int %}
+          <td bgcolor={{palette[2]}}>{{ data2[key]|e }}</td>
+          {% elif data1[key]|int == data2[key]|int%}
+          <td bgcolor={{palette[1]}}>{{ data1[key]|e }}</td>
+          {% else %}
+          <td bgcolor={{palette[3]}}>{{ data2[key]|e }}</td>
+          {% endif %}
+        {% else %}
+          <td bgcolor={{palette[0]}}>{{ data2[key]|e }}</td>
+        {% endif %}  
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

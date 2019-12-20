@@ -4,9 +4,9 @@
     <tr>
       <td><b>{{ key|e|capitalize }}</b></td>
       {% if data[key]|int > 100 %}
-      <td bgcolor="#00ff00">{{ data[key]|e }}</td>
+      <td bgcolor={{palette[3]}}>{{ data[key]|e }}</td>
       {% else %}
-      <td>{{ data[key]|e }}</td>
+      <td bgcolor={{palette[2]}}>{{ data[key]|e }}</td>
       {% endif %}
     </tr>
     {% endfor %}

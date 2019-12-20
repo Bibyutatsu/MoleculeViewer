@@ -3,9 +3,8 @@
 {% block title %}{{ data.name}} {% endblock %}
 
 {% block content %}
-<div class="container" style="width:100%;">
-
-  <nav class="navbar">
+  <nav class="navbar navbar-default">
+    <div class="container" style="width:100%;">
     <div class="navbar-header">
     <span class="navbar-brand">{{ config.APPNAME }}</span>
     </div>
@@ -17,22 +16,23 @@
     </form>
     <ul class="nav navbar-nav">
       <li><a href="/">Home</a></li>
+      <li class="active"><a href="/0">Molecules</a></li>
       <li><a href="/{{pager.prev}}">&larr;</a> </li>
       <li><a href="/{{pager.next}}">&rarr;</a> </li>
+      <li><a href="/compare/0&1/">Compare</a></li>
       {% include 'links.html' %}
     </ul>
+  </div>
   </nav>
 
   <div class="row">
     <div class="col-md-6">
-      <img src="{{ '/example/images/'+data.notes }}" class="img-responsive center-block" alt="">
+      <img src="{{ '/example/images/'+data.notes }}" class="img-thumbnail" alt="">
     </div>
     <div class="col-md-6">
       <h2>{{data.notes}}</h2>
       {% include 'table.html' %}
     </div>
   </div>
-
-</div>
 
 {% endblock %}

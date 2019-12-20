@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<nav class="navbar">
+<nav class="navbar navbar-default">
     <div class="navbar-header">
       
     <span class="navbar-brand">{{ config.APPNAME }}</span>
@@ -18,38 +18,39 @@
       <button type="Enter" class="btn btn-default">Enter</button>
     </form>
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
+      <li class="active"><a href="/">Home</a></li>
         <li><a href="/0">Molecules</a></li>
         <li><a href="/clear">Clear Database</a></li>
+        <li><a href="/compare/0&1/">Compare</a></li>
       {% include 'links.html' %}
     </ul>
   </nav>
-<div class="col-md-6">
+
+<div class="col-md-12">
+{% block progress%}{% endblock %}
+</div>
+
+  <div>
+<div class="col-md-12">
   {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul class=alert>
+    <ul class="alert alert-warning">
     {% for message in messages %}
       <li>{{ message }}</li>
     {% endfor %}
     </ul>
   {% endif %}
 {% endwith %}
-<table class="table">
-    <thead>
-        <tr>
-        <th>Molecules in Database</th>
-        </tr>
-    </thead>
-  <tbody>
+        <h2>Molecules in Database</h2>
+    <ol start="0" class="list-group">
     {% for rows in data %}
-    <tr>
-        <td>
-            <a href='/{{ loop.index - 1}}'>{{ rows["name"]|e }}</a>
-        </td>
-    </tr>
+    <li class="list-group-item">
+            <a href='/{{ loop.index - 1}}'><b>Molecule{{loop.index - 1}}:</b> {{rows["name"]|e }}</a>
+    </li>
     {% endfor %}
-  </tbody>
-</table>
+  </ol>
+</div>
 </div>
 
 {% endblock %}
+
