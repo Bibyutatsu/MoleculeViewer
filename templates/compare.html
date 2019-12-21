@@ -38,7 +38,7 @@
 
 <div class="row">
   <div class="col-md-2 text-center" style="margin-top: 9px">
-    {% for i in range(47) %}
+    {% for i in range(40) %}
     <br/>
     {%endfor%}
   <table class="table">
@@ -53,7 +53,7 @@
 </div>
   <div class="col-md-5 text-center">
     <h2>{{data1.name}}</h2>
-    <img src="{{ '/example/images/'+data1.notes }}" class="img-thumbnail" alt="200x200">
+    <img src="{{ '/example/images/'+data1.notes }}" class="img-thumbnail">
     <table class="table">
     <tbody>
       {% for key in column %}
@@ -96,6 +96,9 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
+  <div class="col-md-12 text-center">
+    <img src="{{ '/example/comparison/'+ind1+'&'+ind2+'.svg' }}" class="img-thumbnail" alt="200x200">
   </div>
 </div>
 {% endblock %}

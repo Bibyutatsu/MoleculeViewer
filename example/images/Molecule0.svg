@@ -1,30 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000pt" height="1000pt" viewBox="0 0 1000 1000" version="1.1">
-<defs>
-<g>
-<symbol overflow="visible" id="glyph0-0">
-<path style="stroke:none;" d="M 0.640625 2.265625 L 0.640625 -9.015625 L 7.03125 -9.015625 L 7.03125 2.265625 Z M 1.359375 1.546875 L 6.328125 1.546875 L 6.328125 -8.296875 L 1.359375 -8.296875 Z M 1.359375 1.546875 "/>
-</symbol>
-<symbol overflow="visible" id="glyph0-1">
-<path style="stroke:none;" d="M 1.25 -9.328125 L 2.515625 -9.328125 L 2.515625 0 L 1.25 0 Z M 1.25 -9.328125 "/>
-</symbol>
-</g>
-</defs>
-<g id="surface1">
-<rect x="0" y="0" width="1000" height="1000" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
-<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
-  <use xlink:href="#glyph0-1" x="498" y="536.255859"/>
-</g>
-<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
-  <use xlink:href="#glyph0-1" x="608.417969" y="472.505859"/>
-</g>
-<g style="fill:rgb(63%,12%,94%);fill-opacity:1;">
-  <use xlink:href="#glyph0-1" x="718.835938" y="536.255859"/>
-</g>
-<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 279.164062 531.875 L 389.582031 468.125 "/>
-<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 389.582031 468.125 L 443.039062 498.988281 "/>
-<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 443.039062 498.988281 L 496.5 529.855469 "/>
-<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 503.5 529.855469 L 606.917969 470.144531 "/>
-<path style="fill:none;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(63%,12%,94%);stroke-opacity:1;stroke-miterlimit:10;" d="M 613.917969 470.144531 L 717.335938 529.855469 "/>
-</g>
-</svg>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg:svg version="1.1" baseProfile="full"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xml:space="preserve" width="1000px" height="1000px" >
+<svg:polygon fill="rgb(255,255,255)" stroke="none" stroke-width="0" points="0.00,0.00 1000.00,0.00 1000.00,1000.00 0.00,1000.00 0.00,0.00"></svg:polygon>
+<svg:g>  <svg:text font-family="helvetica"   font-size="12.00" fill="rgb(160,30,239)" x="498.33" y="539.08">I</svg:text>
+</svg:g><svg:g>  <svg:text font-family="helvetica"   font-size="12.00" fill="rgb(160,30,239)" x="608.75" y="475.32">I</svg:text>
+</svg:g><svg:g>  <svg:text font-family="helvetica"   font-size="12.00" fill="rgb(160,30,239)" x="719.17" y="539.08">I</svg:text>
+</svg:g><svg:line x1="279.16" y1="531.88" x2="389.58" y2="468.12" stroke="rgb(0,0,0)" stroke-width="1"></svg:line>
+<svg:line x1="389.58" y1="468.12" x2="442.52" y2="498.69" stroke="rgb(0,0,0)" stroke-width="1"></svg:line>
+<svg:line x1="442.52" y1="498.69" x2="495.45" y2="529.25" stroke="rgb(160,30,239)" stroke-width="1"></svg:line>
+<svg:line x1="504.55" y1="529.25" x2="605.87" y2="470.75" stroke="rgb(160,30,239)" stroke-width="1"></svg:line>
+<svg:line x1="614.97" y1="470.75" x2="716.29" y2="529.25" stroke="rgb(160,30,239)" stroke-width="1"></svg:line>
+</svg:svg>
